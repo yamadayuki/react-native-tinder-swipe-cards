@@ -4,18 +4,14 @@
   "description": "Swipe cards for stylishly passing & failing a card",
   "main": "SwipeCards.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prettier": "prettier --l ./**/*.js",
+    "prettier-fix": "prettier --write ./**/*.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/meteor-factory/react-native-tinder-swipe-cards.git"
   },
-  "keywords": [
-    "react-native",
-    "tinder",
-    "cards",
-    "swipe"
-  ],
+  "keywords": ["react-native", "tinder", "cards", "swipe"],
   "author": "meteor-factory",
   "license": "MIT",
   "bugs": {
@@ -25,5 +21,8 @@
   "dependencies": {
     "clamp": "^1.0.1",
     "prop-types": "^15.6.0"
+  },
+  "devDependencies": {
+    "prettier": "^1.12.1"
   }
 }
