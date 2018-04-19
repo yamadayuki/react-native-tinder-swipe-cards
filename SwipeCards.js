@@ -59,6 +59,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "red",
   },
+  overlay: {
+    position: "absolute",
+  },
 });
 
 //Components could be unloaded and loaded and we will loose the users currentIndex, we can persist it here.
@@ -93,6 +96,8 @@ export default class SwipeCards extends Component {
     noView: PropTypes.element,
     onClickHandler: PropTypes.func,
     renderCard: PropTypes.func,
+    renderYupCardOverlay: PropTypes.func,
+    renderNopeCardOverlay: PropTypes.func,
     cardRemoved: PropTypes.func,
     dragY: PropTypes.bool,
     smoothTransition: PropTypes.bool,
@@ -444,13 +449,28 @@ export default class SwipeCards extends Component {
     let rotate = pan.x.interpolate({ inputRange: [-200, 0, 200], outputRange: ["-30deg", "0deg", "30deg"] });
     let opacity = pan.x.interpolate({ inputRange: [-200, 0, 200], outputRange: [0.5, 1, 0.5] });
 
+    let yupCardOpacity = pan.x.interpolate({ inputRange: [0, 100], outputRange: [0, 1] });
+    let nopeCardOpacity = pan.x.interpolate({ inputRange: [-200, 0], outputRange: [1, 0] });
+
     let scale = enter;
 
-    let animatedCardStyles = { transform: [{ translateX }, { translateY }, { rotate }, { scale }], opacity };
+    let animatedCardStyles = { transform: [{ translateX }, { translateY }, { rotate }, { scale }] };
 
     return (
       <Animated.View key={"top"} style={[styles.card, animatedCardStyles]} {...this._panResponder.panHandlers}>
-        {this.props.renderCard(this.state.card)}
+        <Animated.View key={"top.inner"} style={[styles.card, { opacity }]}>
+          {this.props.renderCard(this.state.card)}
+        </Animated.View>
+        {this.props.renderYupCardOverlay && (
+          <Animated.View key={"top.yupOverlay"} style={[styles.card, styles.overlay, { opacity: yupCardOpacity }]}>
+            {this.props.renderYupCardOverlay(this.state.card)}
+          </Animated.View>
+        )}
+        {this.props.renderNopeCardOverlay && (
+          <Animated.View key={"top.nopeOverlay"} style={[styles.card, styles.overlay, { opacity: nopeCardOpacity }]}>
+            {this.props.renderNopeCardOverlay(this.state.card)}
+          </Animated.View>
+        )}
       </Animated.View>
     );
   }
