@@ -34,6 +34,8 @@ declare module "react-native-swipe-cards" {
     cardRemoved?: (index: number) => void;
     dragY?: boolean;
     smoothTransition?: boolean;
+    onDragStart?: () => void;
+    onDragRelease?: () => void;
   }
 
   export class SwipeCards extends React.Component<SwipeCardsProperties, any> {}
