@@ -4,7 +4,7 @@ import * as ReactNative from "react-native";
 declare module "react-native-swipe-cards" {
   export interface SwipeCardsProperties {
     cards: any[];
-    cardKey: string;
+    cardKey?: string;
     hasMaybeAction?: boolean;
     loop?: boolean;
     onLoop?: () => void;
@@ -28,7 +28,7 @@ declare module "react-native-swipe-cards" {
     nopeText?: string;
     noView?: JSX.Element;
     onClickHandler?: (data: any) => void;
-    renderCard?: (data: any) => JSX.Element | null;
+    renderCard: (data: any) => JSX.Element | null;
     renderYupCardOverlay?: (data: any) => JSX.Element | null;
     renderNopeCardOverlay?: (data: any) => JSX.Element | null;
     cardRemoved?: (index: number) => void;
