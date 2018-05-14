@@ -24,5 +24,6 @@
   },
   "devDependencies": {
     "prettier": "^1.12.1"
-  }
+  },
+  "typings": "./index.d.ts"
 }
